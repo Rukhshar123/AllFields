@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subcategory</title>
+</head>
+<body>
+    <form method="post" action="/updateSubcategory/{{subcate.id}}">
+        {% csrf_token %}
+        <center>
+            {% if messages %}
+                {% for msg in messages %}
+                    <script>
+    					alert('{{ msg }}');
+				    </script>
+                {% endfor %}
+            {% endif%}
+        </center>
+        <table border="1" cellspacing="0" cellpadding="10" align="center">
+                <tr>
+                    <td>Edit subcategory Name:</td>
+                    <td><input type="text" name="name" value="{{subcate.name}}"></td>
+                </tr>
+                <tr>
+                    <td>Edit Category Name:</td>
+                    <td><select id="cate_id" name="cate_id">
+                         <option value="">Select Category </option>
+                        {% for i in category %}
+                            {% if i.id == subcate.cat_id_id %}
+                                <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="submit"></td>
+                </tr>
+        </table>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subcategory</title>
+</head>
+<body>
+    <form method="post" action="/updateProduct/{{product.id}}">
+        {% csrf_token %}
+        <center>
+            {% if messages %}
+                {% for msg in messages %}
+                    <script>
+    					alert('{{ msg }}');
+				    </script>
+                {% endfor %}
+            {% endif%}
+        </center>
+        <table border="1" cellspacing="0" cellpadding="10" align="center">
+                <tr>
+                    <td>Enter Product Name:</td>
+                    <td><input type="text" name="name" value="{{product.name}}"></td>
+                </tr>
+                <tr>
+                    <td>Enter Price:</td>
+                    <td><input type="text" name="price" value="{{product.price}}"></td>
+                </tr>
+                <tr>
+                    <td>Enter Date:</td>
+                    <td><input type="date" name="date" value="{{product.date}}" ></td>
+                </tr>
+                <tr>
+                    <td>Enter Stock:</td>
+                    <td>
+
+                        <input type="radio" name="stock" value="instock" {% if product.stock == 'instock' %} checked="checked" {% endif %}>In Stock
+                        <input type="radio" name="stock" value="outstock" {% if product.stock == 'outstock' %} checked="checked" {% endif %} >Out of Stock
+
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Enter Size:</td>
+                    <td>
+                        <input type="checkbox" name="size[]" value="M" {% if "M" in size_list %} checked="checked" {% endif %} >Medium
+                        <input type="checkbox" name="size[]" value="S" {% if "S" in size_list %} checked="checked" {% endif %}>Small
+                        <input type="checkbox" name="size[]" value="L" {% if "L" in size_list %} checked="checked" {% endif %}>Large
+                        <input type="checkbox" name="size[]" value="XL" {% if "XL" in size_list %} checked="checked" {% endif %}>Extra Large
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select Category Name:</td>
+                    <td><select id="cate_id" name="cate_id">
+                    <option value="">Select Category </option>
+                        {% for i in cat %}
+                            {% if i.id == product.cat_id_id %}
+                                <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select Category Name:</td>
+                    <td><select id="sub_id" name="sub_id">
+                         <option value="">Select Subcategory </option>
+                    {% for i in sub %}
+                            {% if i.id == product.sub_id_id %}
+                                <option value="{{ i.id }}" selected="selected">{{ i.name }}</option>
+                            {% else %}
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="submit"></td>
+                </tr>
+        </table>
+
+    </form>
+</body>
+</html>

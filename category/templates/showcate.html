@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped" >
+    <center>
+            {% if messages %}
+                {% for msg in messages %}
+                    <script>
+    					alert('{{ msg }}');
+				    </script>
+                {% endfor %}
+            {% endif%}
+</center>
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+
+    {% for i in category %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.name }}</td>
+        <td>
+            <a href="editCategory/{{i.id}}">Edit</a>
+        </td>
+        <td>
+            <a href="deleteCategory/{{i.id}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
